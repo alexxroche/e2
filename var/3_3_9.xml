@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<e1>
+<!-- row 1 zero -->
+<tile id="1">
+    <!-- these are the edges of tile 1 -->
+	<edge value="1"/>
+	<edge value="6"/>
+	<edge value="6"/>
+	<edge value="1"/>
+</tile>
+<tile id="2">
+	<edge value="1"/>
+	<edge value="7"/>
+	<edge value="3"/>
+	<edge value="6"/>
+</tile>
+<tile id="4">
+	<edge value="6"/>
+	<edge value="5"/>
+	<edge value="5"/>
+	<edge value="1"/>
+</tile>
+<!-- row 2 -->
+<!-- N.B. tiles 3 and 4 have been swapped to make solving harder -->
+<tile id="3">
+	<edge value="1"/>
+	<edge value="1"/>
+	<edge value="9"/>
+	<edge value="7"/>
+</tile>
+<tile id="5">
+	<edge value="3"/>
+	<edge value="2"/>
+	<edge value="7"/>
+	<edge value="5"/>
+</tile>
+<tile id="6">
+	<edge value="9"/>
+	<edge value="1"/>
+	<edge value="7"/>
+	<edge value="2"/>
+</tile>
+<tile id="7">
+	<edge value="5"/>
+	<edge value="7"/>
+	<edge value="1"/>
+	<edge value="1"/>
+</tile>
+<tile id="8">
+	<edge value="7"/>
+	<edge value="9"/>
+	<edge value="1"/>
+	<edge value="7"/>
+</tile>
+<tile id="9">
+	<edge value="7"/>
+	<edge value="1"/>
+	<edge value="1"/>
+	<edge value="9"/>
+</tile>
+</e1>
