@@ -1,0 +1,33 @@
+[package]
+name = "e2_rust"
+version = "0.1.1"
+authors = ["Alexx Roche <notice-dev@alexx.net>"]
+edition = "2018"
+
+[dependencies]
+rust-ini = "0.15"
+#quick-xml = "0.18" # might be fast but HARD to use compared to sxd-document
+sxd-document = "0.3" # to parse XML files - only used to parse config, so speed is not important
+uuid = "0.4"
+#uuid = { version = "0.4", features = ["serde", "v4"] }
+blake3 = "0.3"  # to hash
+
+# serde for (de)serialising data structures so we can write/read them to/from disk
+serde = { version = "1.0", features = ["derive"] }
+#serde_json = "1.0" # is this the fastest? Is this the most compact?
+serde_json = { version = "1.0", features = ["unbounded_depth"] }
+serde_yaml = "0.8"
+serde_stacker = "0.1"
+#rmp-serde = "0.14"
+chrono = "0.4"
+difference = "2.0"
+# for last_gasp
+signal-hook = "0.1.16"
+
+[dev-dependencies]
+once_cell = "1.4.1"
+criterion = "0.3"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
