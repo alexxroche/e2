@@ -1,50 +1,54 @@
+#![allow(dead_code)]
 extern crate e2_rust;
 
 #[cfg(test)]
-#[path = "./src/st.rs"]
+#[path = "../src/st.rs"] mod st;
+#[path = "../src/log.rs"] mod log;
+#[path = "../src/fsio.rs"] mod fsio;
 mod i_tests {
 
     use super::*;
-    use e2_rust::log::{err, warn};
-    use e2_rust::st::{c_vec_from_tiles, graft, mut_ref_to_child, node_children, update_node, ST};
+    use log::{err, warn};
+    use st::{St, LhpResult};
+    //use st::{c_vec_from_tiles, graft, mut_ref_to_child, node_children, update_node, St, LhpResult};
     use once_cell::sync::Lazy;
     //mod common;
 
-    //static TEST_S: ST = ST { v: None, c: Some(vec![
-    static TEST_S: Lazy<ST> = Lazy::new(|| ST {
+    //static TEST_S: St = St { v: None, c: Some(vec![
+    static TEST_S: Lazy<St> = Lazy::new(|| St {
         v: None,
         c: Some(vec![
-            ST {
+            St {
                 v: Some((1, 1)),
-                c: Some(vec![ST {
+                c: Some(vec![St {
                     v: Some((2, 1)),
                     c: None,
                 }]),
             },
-            ST {
+            St {
                 v: Some((1, 2)),
                 c: Some(vec![
-                    ST {
+                    St {
                         v: Some((2, 1)),
                         c: Some(vec![
-                            ST {
+                            St {
                                 v: Some((3, 2)),
                                 c: None,
                             },
-                            ST {
+                            St {
                                 v: Some((3, 2)),
                                 c: None,
                             },
                         ]),
                     },
-                    ST {
+                    St {
                         v: Some((2, 3)),
                         c: Some(vec![
-                            ST {
+                            St {
                                 v: Some((3, 0)),
                                 c: None,
                             },
-                            ST {
+                            St {
                                 v: Some((3, 2)),
                                 c: None,
                             },
@@ -52,9 +56,9 @@ mod i_tests {
                     },
                 ]),
             },
-            ST {
+            St {
                 v: Some((1, 3)),
-                c: Some(vec![ST {
+                c: Some(vec![St {
                     v: Some((2, 3)),
                     c: None,
                 }]),
@@ -62,43 +66,43 @@ mod i_tests {
         ]),
     });
     //};
-    static TEST_T: Lazy<ST> = Lazy::new(|| ST {
+    static TEST_T: Lazy<St> = Lazy::new(|| St {
         v: Some((199, 2)),
         c: Some(vec![
-            ST {
+            St {
                 v: Some((71, 1)),
-                c: Some(vec![ST {
+                c: Some(vec![St {
                     v: Some((7, 1)),
                     c: None,
                 }]),
             },
-            ST {
+            St {
                 v: Some((71, 2)),
                 c: Some(vec![
-                    ST {
+                    St {
                         v: Some((72, 2)),
                         c: Some(vec![
-                            ST {
+                            St {
                                 v: Some((73, 2)),
                                 c: None,
                             },
-                            ST {
+                            St {
                                 v: Some((73, 2)),
                                 c: None,
                             },
                         ]),
                     },
-                    ST {
+                    St {
                         v: Some((72, 3)),
                         c: Some(vec![
-                            ST {
+                            St {
                                 v: Some((73, 1)),
-                                c: Some(vec![ST {
+                                c: Some(vec![St {
                                     v: Some((777, 3)),
                                     c: None,
                                 }]),
                             },
-                            ST {
+                            St {
                                 v: Some((73, 2)),
                                 c: None,
                             },
@@ -106,9 +110,9 @@ mod i_tests {
                     },
                 ]),
             },
-            ST {
+            St {
                 v: Some((7, 3)),
-                c: Some(vec![ST {
+                c: Some(vec![St {
                     v: Some((7, 3)),
                     c: None,
                 }]),
@@ -120,9 +124,9 @@ mod i_tests {
     fn it_walk_branch() {
         //common::setup();
         // walk the tree
-        let s: ST = TEST_S.clone();
+        let s: St = TEST_S.clone();
         let (new_tiles, new_path) = match s.left_hand_path() {
-            Ok((b, p)) => {
+            Ok(LhpResult(b, p)) => {
                 err(&"LHP found a path");
                 (b, p)
             }
@@ -130,11 +134,11 @@ mod i_tests {
                 "Zero size SearchTree" if s.c == None => {
                     warn(format!("Zero size SearchTree: {:?}", s));
                     (vec![], vec![])
-                } // to be expected: if the ST is blank then the LHP is blank
+                } // to be expected: if the St is blank then the LHP is blank
                 "Zero size SearchTree" => {
                     err(format!("left_hand_path failed HARD: {:?}", s));
                     (vec![], vec![])
-                } // to be expected: if the ST is blank then the LHP is blank
+                } // to be expected: if the St is blank then the LHP is blank
                 _ => {
                     // uh-oh! looks like an error
                     err(format!("LHP FAILED!!!: {:?}", &e));
