@@ -1,15 +1,18 @@
 #![allow(dead_code)]
 extern crate e2_rust;
 
+#[path = "../src/fsio.rs"]
+mod fsio;
+#[path = "../src/log.rs"]
+mod log;
 #[cfg(test)]
-#[path = "../src/st.rs"] mod st;
-#[path = "../src/log.rs"] mod log;
-#[path = "../src/fsio.rs"] mod fsio;
+#[path = "../src/st.rs"]
+mod st;
 mod i_tests {
 
     use super::*;
     use log::{err, warn};
-    use st::{St, LhpResult};
+    use st::{LhpResult, St};
     //use st::{c_vec_from_tiles, graft, mut_ref_to_child, node_children, update_node, St, LhpResult};
     use once_cell::sync::Lazy;
     //mod common;
