@@ -35,7 +35,7 @@ pub fn final_breath(sig: i32, st: &St, c: &Cnf) {
     // this should take a function as an argument so that
     // this can be an external crate
     println!("Writing current St to disk");
-    store_st(&st, &c);
+    store_st(st, c);
     // write board_to_html while we are at it
     println!("Files written (phew!); exiting now {:#?}", sig);
     std::process::exit(sig);

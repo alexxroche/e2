@@ -99,7 +99,7 @@ fn neighbour_edges(
     //let (te, re, be, le): (u8, u8, u8, u8) = (0, 0, 0, 0);
 
     // find the pos from index  N.B. xpos,ypos are zero-indexed!!
-    let (xpos, ypos): (usize, usize) = index_to_coords(&c.x, &path_index);
+    let (xpos, ypos): (usize, usize) = index_to_coords(&c.x, path_index);
 
     let [nt, nr, nb, nl] = neighbours(&xpos, &ypos, &c.x, &c.y);
 
@@ -579,7 +579,7 @@ pub fn puzzle(
         match perm.get(&ni) {
             Some(tls) => {
                 // take into account prih (Pieces remainin the hand, i.e. the ones that can still be placed)
-                let tiles_tr_intersection = intersection_of_trih_and_vec(&prih, &tls);
+                let tiles_tr_intersection = intersection_of_trih_and_vec(&prih, tls);
 
                 let border_count: u8 = (&ni)
                     .iter()

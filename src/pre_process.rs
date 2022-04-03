@@ -331,8 +331,8 @@ pub fn pre_process_cfg(mut c: Cnf) -> ProcedCfg {
         };
 
         // create the var dir if it is missing
-        if !path_exists(&var_dir) {
-            if let Err(e) = fsio::mkdir(&var_dir) {
+        if !path_exists(var_dir) {
+            if let Err(e) = fsio::mkdir(var_dir) {
                 panic!("[e] unable to create var_dir: {}", e)
             };
         }
@@ -346,7 +346,7 @@ pub fn pre_process_cfg(mut c: Cnf) -> ProcedCfg {
 
         // add the hash to the conf.ini (if it isn't already set)
         {
-            update_cf(&c.filename, this_section, &this_key, &blake_str);
+            update_cf(&c.filename, this_section, &this_key, blake_str);
         }
 
         let my_uuid = Uuid::parse_str(&blake_str[0..32]).unwrap();

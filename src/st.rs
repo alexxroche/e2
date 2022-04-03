@@ -204,7 +204,7 @@ impl St {
                                     npr.push(i); // np.push(index_of_child_within_the vector)
 
                                     // recurse down that child
-                                    match (&ch).iter_left_hand_path(nbr, npr, result) {
+                                    match (ch).iter_left_hand_path(nbr, npr, result) {
                                         Ok(IlhpR(dr_rb, dr_rp, dr_r)) => {
                                             //deep_recusion
                                             tnbr.extend(dr_rb);
